@@ -2,6 +2,8 @@
 
 namespace CalendarService.Services
 {
+    using System.Text.Json;
+
     public class EventServiceClient : IEventServiceClient
     {
         private readonly HttpClient _httpClient;
@@ -15,15 +17,24 @@ namespace CalendarService.Services
         {
             try
             {
-                var events = await _httpClient.GetFromJsonAsync<List<EventDto>>("api/events");
+                var response = await _httpClient.GetAsync("api/events");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new List<EventDto>();
+                }
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                var events = JsonSerializer.Deserialize<List<EventDto>>(json);
+
                 return events ?? new List<EventDto>();
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
                 return new List<EventDto>();
             }
-
         }
     }
+
 }

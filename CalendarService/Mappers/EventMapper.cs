@@ -10,11 +10,14 @@ public static class EventMapper
         return new CalendarEntity
         {
             Id = dto.Id,
-            Title = dto.Title,
-            StartTime = dto.StartTime,
-            EndTime = dto.EndTime,
-            IsAllDay = dto.IsAllDay,
+            Title = dto.Title ?? "Unknown Event",
+            StartTime = dto.Date,
+            IsAllDay = false,
+            Location = dto.Location ?? "Unknown Location",
+            Category = dto.Category ?? "Unknown Category",
+            Status = dto.Status ?? "Unknown Status",
+            Description = dto.Description ?? "No Details",
+            Price = dto.Price
         };
     }
-
 }

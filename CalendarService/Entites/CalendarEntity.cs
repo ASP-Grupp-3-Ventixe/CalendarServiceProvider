@@ -5,16 +5,13 @@ namespace CalendarService.Entites;
 public class CalendarEntity
 {
     [Key]
-    public Guid Id { get; set; } = Guid.NewGuid();
-
-    [Required]
-    public string Title { get; set; }
-
-    [Required]
+    public int Id { get; set; }
+    public string? Title { get; set; }
     public DateTime StartTime { get; set; }
-
-    [Required]
-    public DateTime EndTime { get; set; }
-
     public bool IsAllDay { get; set; }
+    public string? Location { get; set; }
+    public string? Category { get; set; }
+    public string? Status { get; set; }
+    public string? Description { get; set; }
+    public decimal? Price { get; set; }
 }

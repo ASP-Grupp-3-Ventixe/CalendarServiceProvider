@@ -16,11 +16,10 @@ namespace Tests
         {
             new EventDto
             {
-                Id = Guid.NewGuid(),
+                Id = 1,
                 Title = "Testevent",
-                StartTime = DateTime.Now,
-                EndTime = DateTime.Now.AddHours(1),
-                IsAllDay = false
+                Date = DateTime.Now,
+                Location = "Online"
             }
         });
     }

@@ -7,17 +7,33 @@ namespace CalendarService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CalendarController(EventServiceClient eventServiceClient) : ControllerBase
+    public class CalendarController : ControllerBase
     {
-        private readonly EventServiceClient _eventServiceClient = eventServiceClient;
+        private readonly IEventServiceClient _eventServiceClient;
+
+        public CalendarController(IEventServiceClient eventServiceClient)
+        {
+            _eventServiceClient = eventServiceClient;
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetCalendarEvents()
         {
-            var eventDtos = await _eventServiceClient.GetAllEventsAsync();
-            
-            var calendarEntities = eventDtos.Select(EventMapper.MapToCalendarEntity).ToList();
-            return Ok(calendarEntities);
+            try
+            {
+                var eventDtos = await _eventServiceClient.GetAllEventsAsync();
+                var calendarEntities = eventDtos
+                    .Select(EventMapper.MapToCalendarEntity)
+
+                    .ToList();
+
+                return Ok(calendarEntities);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
         }
     }
+
 }
