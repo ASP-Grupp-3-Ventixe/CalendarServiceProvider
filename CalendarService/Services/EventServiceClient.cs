@@ -2,6 +2,7 @@
 
 namespace CalendarService.Services
 {
+    using System;
     using System.Text.Json;
 
     public class EventServiceClient : IEventServiceClient
@@ -32,7 +33,9 @@ namespace CalendarService.Services
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return new List<EventDto>();
+                
             }
         }
     }

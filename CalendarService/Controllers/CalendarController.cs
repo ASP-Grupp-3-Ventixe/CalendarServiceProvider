@@ -31,7 +31,7 @@ namespace CalendarService.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Error: {ex.Message}");
+                return StatusCode(500, "Unexpected error");
             }
         }
     }

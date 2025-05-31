@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Tests
 {
-    public class EventServiceClientFake : IEventServiceClient
+    public class EventServiceClientTest : IEventServiceClient
 {
     public Task<List<EventDto>> GetAllEventsAsync()
     {
@@ -31,7 +31,7 @@ public class EventServiceClientTests
     public async Task GetAllEventsAsync_ShouldReturnListOfEvents()
     {
         // Arrange
-        var service = new EventServiceClientFake();
+        var service = new EventServiceClientTest();
 
         // Act
         var result = await service.GetAllEventsAsync();
